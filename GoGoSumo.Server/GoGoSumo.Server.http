@@ -1,0 +1,6 @@
+@GoGoSumo.Server_HostAddress = http://localhost:5144
+
+GET {{GoGoSumo.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
