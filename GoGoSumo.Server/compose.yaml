@@ -16,8 +16,8 @@ services:
     image: flyway/flyway
     command: -connectRetries=60 migrate
     volumes:
-      - ./Database/Migrations:/flyway/sql
-      - ./Database:/flyway/conf
+      - ./_Database/Migrations:/flyway/sql
+      - ./_Database:/flyway/conf
     depends_on:
       postgres:
         condition: service_healthy
