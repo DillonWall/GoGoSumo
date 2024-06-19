@@ -22,9 +22,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(string clerk_id)
     {
-        var user = await _userService.GetById(id);
+        var user = await _userService.GetById(clerk_id);
         return Ok(user);
     }
 
@@ -36,16 +36,16 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, UserModel model)
+    public async Task<IActionResult> Update(string clerk_id, UserModel model)
     {
-        await _userService.Update(id, model);
+        await _userService.Update(clerk_id, model);
         return Ok(new { message = "User updated" });
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(string clerk_id)
     {
-        await _userService.Delete(id);
+        await _userService.Delete(clerk_id);
         return Ok(new { message = "User deleted" });
     }
 }

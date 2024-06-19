@@ -1,12 +1,14 @@
 using GoGoSumo.Server.Helpers.Annotations;
 using GoGoSumo.Server.Models.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoGoSumo.Server.Models;
 
 public class UserDto
 {
-    public int? Id { get; set; }
+    [Column("clerk_id")]
+    public string? ClerkId { get; set; }
     public string? Name { get; set; }
     [EmailAddress]
     public string? Email { get; set; }

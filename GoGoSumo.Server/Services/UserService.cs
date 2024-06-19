@@ -3,17 +3,16 @@ using GoGoSumo.Server.Helpers.Exceptions;
 using GoGoSumo.Server.Models;
 using GoGoSumo.Server.Models.ApiModels;
 using GoGoSumo.Server.Repositories;
-using BC = BCrypt.Net.BCrypt;
 
 namespace GoGoSumo.Server.Services;
 
 public interface IUserService
 {
     Task<IEnumerable<UserDto>> GetAll();
-    Task<UserDto> GetById(int id);
+    Task<UserDto> GetById(string clerk_id);
     Task Create(UserModel model);
-    Task Update(int id, UserModel model);
-    Task Delete(int id);
+    Task Update(string clerk_id, UserModel model);
+    Task Delete(string clerk_id);
 }
 
 public class UserService : IUserService
@@ -34,9 +33,9 @@ public class UserService : IUserService
         return await _userRepository.GetAll();
     }
 
-    public async Task<UserDto> GetById(int id)
+    public async Task<UserDto> GetById(string clerk_id)
     {
-        UserDto? dto = await _userRepository.GetById(id);
+        UserDto? dto = await _userRepository.GetById(clerk_id);
 
         if (dto == null)
             throw new KeyNotFoundException("User not found");
@@ -47,44 +46,36 @@ public class UserService : IUserService
     public async Task Create(UserModel model)
     {
         // validate
-        if (await _userRepository.GetByEmail(model.Email!) != null)
-            throw new ValidationException("User with the email '" + model.Email + "' already exists");
+        if (await _userRepository.GetById(model.ClerkId!) != null)
+            throw new ValidationException("User with the Clerk user_id '" + model.ClerkId + "' already exists");
 
         // map
         UserDto dto = _mapper.Map<UserDto>(model);
-
-        // modify (hash password)
-        dto.PasswordHash = BC.HashPassword(model.Password);
 
         // save user
         await _userRepository.Create(dto);
     }
 
-    public async Task Update(int id, UserModel model)
+    public async Task Update(string clerk_id, UserModel model)
     {
         // validate
-        UserDto? dto = await _userRepository.GetById(id);
+        UserDto? dto = await _userRepository.GetById(clerk_id);
 
         if (dto == null)
             throw new KeyNotFoundException("User not found");
 
-        var emailChanged = !string.IsNullOrEmpty(model.Email) && dto.Email != model.Email;
-        if (emailChanged && await _userRepository.GetByEmail(model.Email!) != null)
-            throw new ValidationException("User with the email '" + model.Email + "' already exists");
+        if (await _userRepository.GetById(model.ClerkId!) != null)
+            throw new ValidationException("User with the Clerk user_id '" + model.ClerkId + "' already exists");
 
         // copy props to dto
         _mapper.Map(model, dto);
-
-        // modify (hash password if it was entered)
-        if (!string.IsNullOrEmpty(model.Password))
-            dto.PasswordHash = BC.HashPassword(model.Password);
 
         // save
         await _userRepository.Update(dto);
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(string clerk_id)
     {
-        await _userRepository.Delete(id);
+        await _userRepository.Delete(clerk_id);
     }
 }

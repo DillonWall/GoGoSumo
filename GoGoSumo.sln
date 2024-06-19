@@ -5,8 +5,6 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoGoSumo.Server", "GoGoSumo.Server\GoGoSumo.Server.csproj", "{DC159B11-6EBB-4720-925B-0B7B63D005AF}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "gogosumo.client", "gogosumo.client\gogosumo.client.esproj", "{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21F62186-45D5-4A98-854D-7975D193A4E2}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -22,12 +20,6 @@ Global
 		{DC159B11-6EBB-4720-925B-0B7B63D005AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC159B11-6EBB-4720-925B-0B7B63D005AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC159B11-6EBB-4720-925B-0B7B63D005AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CF87B3C-B478-4C5D-902E-D0F53D4B0EB0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,17 +5,11 @@ namespace GoGoSumo.Server.Models.ApiModels;
 
 public class UserModel
 {
-    public int? Id { get; set; }
     [Required]
-    public string? Name { get; set; }
-    [Required]
-    [EmailAddress]
-    public string? Email { get; set; }
+    public string? ClerkId { get; set; }
     [Required]
     [Phone]
     public string? Phone { get; set; }
-    [Required]
-    public string? Password { get; set; }
     [Required]
     //[EnumDataTypeArray(typeof(Locale))]
     public IEnumerable<string>? FluentLanguages { get; set; }
