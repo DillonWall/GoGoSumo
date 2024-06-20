@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoGoSumo.Server.Helpers.Annotations;
 
@@ -25,10 +26,9 @@ public sealed class EnumDataTypeArrayAttribute : DataTypeAttribute
     {
         if (value is null) return true;
         var at = value.GetType();
-        if (!at.IsArray) return false;
-        var t = at.GetElementType();
-        if (t != EnumType) return false;
-        foreach (var v in (value as Array)!)
+        // Check if not an IEnumerable
+        if (!typeof(IEnumerable).IsAssignableFrom(at)) return false;
+        foreach (var v in (value as IEnumerable)!)
         {
             if (!Enum.IsDefined(EnumType, v))
             {

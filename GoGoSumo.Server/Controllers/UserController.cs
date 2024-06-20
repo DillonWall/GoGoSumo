@@ -1,4 +1,4 @@
-﻿using GoGoSumo.Server.Models.ApiModels;
+﻿using GoGoSumo.Server.DTOs.Models.User;
 using GoGoSumo.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +21,7 @@ public class UserController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{clerk_id}")]
     public async Task<IActionResult> GetById(string clerk_id)
     {
         var user = await _userService.GetById(clerk_id);
@@ -29,20 +29,20 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(UserModel model)
+    public async Task<IActionResult> Create(UserCreateModel model)
     {
         await _userService.Create(model);
         return Ok(new { message = "User created" });
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string clerk_id, UserModel model)
+    [HttpPut("{clerk_id}")]
+    public async Task<IActionResult> Update(string clerk_id, UserUpdateModel model)
     {
         await _userService.Update(clerk_id, model);
         return Ok(new { message = "User updated" });
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{clerk_id}")]
     public async Task<IActionResult> Delete(string clerk_id)
     {
         await _userService.Delete(clerk_id);
