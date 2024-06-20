@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GoGoSumo.Server.DTOs.Models.Event;
 
-public class TourModel
+public class TourEntity
 {
     public int? Id { get; set; }
     [MaxLength(100)]

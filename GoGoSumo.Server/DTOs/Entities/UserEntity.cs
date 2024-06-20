@@ -6,6 +6,7 @@ namespace GoGoSumo.Server.Models;
 
 public class UserEntity
 {
+    [Length(32, 32)]
     public string? ClerkId { get; set; }
     [Phone]
     public string? Phone { get; set; }

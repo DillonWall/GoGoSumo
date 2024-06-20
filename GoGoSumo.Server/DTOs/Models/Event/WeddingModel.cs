@@ -5,14 +5,19 @@ namespace GoGoSumo.Server.DTOs.Models.Event;
 public class WeddingModel
 {
     public int? Id { get; set; }
+    [MaxLength(100)]
     public string? Name { get; set; }
     public DateOnly? Date { get; set; }
+    [MaxLength(255)]
     public string? Location { get; set; }
     [DataType(DataType.Currency)]
     public float? GoGoPrice { get; set; }
-
-    //   wedding_bride_name VARCHAR(100),
-    //   wedding_groom_name VARCHAR(100),
-    //   wedding_budget_yen DECIMAL(13, 2),
-    //wedding_planner_id VARCHAR(32)
+    [MaxLength(100)]
+    public string? BrideName { get; set; }
+    [MaxLength(100)]
+    public string? GroomName { get; set; }
+    [DataType(DataType.Currency)]
+    public float? Budget { get; set; }
+    [Length(32, 32)]
+    public string? PlannerId { get; set; }
 }

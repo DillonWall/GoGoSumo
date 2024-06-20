@@ -6,6 +6,7 @@ namespace GoGoSumo.Server.DTOs.Models.User;
 
 public class UserCreateModel
 {
+    [Length(32, 32)]
     [Required]
     public string? ClerkId { get; set; }
     [Phone]
