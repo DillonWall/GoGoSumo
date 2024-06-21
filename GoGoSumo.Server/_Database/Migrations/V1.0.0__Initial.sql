@@ -5,8 +5,8 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
     clerk_id VARCHAR(32) PRIMARY KEY,
-    phone VARCHAR(20) NOT NULL,
-    fluent_languages VARCHAR(5)[],
+    user_phone VARCHAR(20) NOT NULL,
+    user_fluent_languages VARCHAR(5)[],
 	role_id INT REFERENCES roles(role_id)
 );
 
@@ -29,13 +29,13 @@ CREATE TABLE weddings (
     wedding_bride_name VARCHAR(100),
     wedding_groom_name VARCHAR(100),
     wedding_budget_yen DECIMAL(13, 2),
-	wedding_planner_id VARCHAR(32)
+	wedding_planner_id VARCHAR(32) REFERENCES users(clerk_id)
 );
 
 CREATE TABLE tours (
 	tour_id SERIAL PRIMARY KEY,
 	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
-	tour_guide_id VARCHAR(32)
+	tour_guide_id VARCHAR(32) REFERENCES users(clerk_id)
 );
 
 CREATE TABLE tour_customers (
@@ -44,7 +44,7 @@ CREATE TABLE tour_customers (
 );
 
 
-INSERT INTO users (clerk_id, phone, fluent_languages, role_id)
+INSERT INTO users (clerk_id, user_phone, user_fluent_languages, role_id)
 VALUES
     ('user1', '123-456-7890', ARRAY['EN'], 1),
     ('user2', '987-654-3210', ARRAY['JP'], 2),
@@ -58,9 +58,9 @@ VALUES
 
 INSERT INTO weddings (event_id, wedding_bride_name, wedding_groom_name, wedding_budget_yen, wedding_planner_id)
 VALUES
-    (1, 'Alice', 'Bob', 20000.00, 'planner1'),
-    (2, 'Claire', 'David', 15000.00, 'planner2'),
-    (3, 'Eva', 'Frank', 18000.00, 'planner3');
+    (1, 'Alice', 'Bob', 20000.00, 'user1'),
+    (2, 'Claire', 'David', 15000.00, 'user2'),
+    (3, 'Eva', 'Frank', 18000.00, 'user3');
 
 INSERT INTO tours (event_id, tour_guide_id)
 VALUES

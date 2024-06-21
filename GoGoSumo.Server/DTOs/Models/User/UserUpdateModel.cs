@@ -11,5 +11,5 @@ public class UserUpdateModel
     [EnumDataTypeArray(typeof(Locale))]
     public IEnumerable<string>? UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
-    public string? UserRole { get; set; }
+    public string? RoleName { get; set; }
 }

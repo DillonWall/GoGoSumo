@@ -15,8 +15,8 @@ public interface IXxxxxRepository
 
 public class XxxxxRepository : IXxxxxRepository
 {
-    private DataContext _context;
-    public static string SELECT_ALL = """
+    private readonly DataContext _context;
+    private static readonly string SELECT_ALL = """
             SELECT 
                 xxxxx_id AS XxxxxId,
                 phone AS Phone

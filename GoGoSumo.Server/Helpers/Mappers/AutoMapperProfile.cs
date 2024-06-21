@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Dapper;
 using GoGoSumo.Server.DTOs.Entities;
 using GoGoSumo.Server.DTOs.Models.Event;
 using GoGoSumo.Server.DTOs.Models.User;
 using GoGoSumo.Server.DTOs.Models.Wedding;
 
-namespace GoGoSumo.Server.Helpers;
+namespace GoGoSumo.Server.Helpers.Mappers;
 
 public class AutoMapperProfile : Profile
 {
@@ -12,10 +13,33 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<UserCreateModel, UserEntity>();
         CreateMap<UserUpdateModel, UserEntity>();
-        CreateMap<EventCreateModel, EventEntity>();
-        CreateMap<EventUpdateModel, EventEntity>();
+        CreateMap<EventCreateModel, EventEntity>()
+            .ForMember(
+                dest => dest.EventDate,
+                opt => opt.MapFrom(
+                    src => src.EventDate.GetValueOrDefault().ToDateTime(TimeOnly.MinValue)
+                )
+            );
+        CreateMap<EventUpdateModel, EventEntity>()
+            .ForMember(
+                dest => dest.EventDate,
+                opt => opt.MapFrom(
+                    src => src.EventDate.GetValueOrDefault().ToDateTime(TimeOnly.MinValue)
+                )
+            );
         CreateMap<WeddingCreateModel, WeddingEntity>();
         CreateMap<WeddingUpdateModel, WeddingEntity>();
+
+        DapperSetTypeMap<UserEntity>();
+        DapperSetTypeMap<EventEntity>();
+        DapperSetTypeMap<WeddingEntity>();
+    }
+
+    private void DapperSetTypeMap<T>()
+    {
+        SqlMapper.SetTypeMap(
+            typeof(T),
+            new ColumnAttributeTypeMapper<T>());
     }
 }
 

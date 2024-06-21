@@ -16,14 +16,9 @@ public interface IEventRepository
 
 public class EventRepository : IEventRepository
 {
-    private DataContext _context;
-    public static string SELECT_ALL = """
-            SELECT 
-                event_id AS EventId,
-                event_name AS EventName
-                event_date AS EventDate
-                event_location AS EventLocation
-                event_gogo_price_yen AS EventGoGoPrice
+    private readonly DataContext _context;
+    private static readonly string SELECT_ALL = """
+            SELECT *
             FROM events
         """;
 
@@ -55,8 +50,8 @@ public class EventRepository : IEventRepository
         using var connection = _context.CreatePostgresConnection();
         var sql = """
                 INSERT INTO events (event_name, event_date, event_location, event_gogo_price_yen)
-                OUTPUT INSERTED.event_id
-                VALUES (@EventName, @EventDate, @EventLocation, @EventGoGoPrice);
+                VALUES (@EventName, @EventDate, @EventLocation, @EventGoGoPrice)
+                RETURNING event_id;
             """;
         return await connection.ExecuteScalarAsync<int>(sql, entity);
     }
@@ -67,10 +62,10 @@ public class EventRepository : IEventRepository
         var sql = """
                 UPDATE events
                 SET
-                    event_name = @EventName,
-                    event_date = @EventDate,
-                    event_location = @EventLocation,
-                    event_gogo_price_yen = @EventGoGoPrice,
+                    event_name = COALESCE(@EventName, event_name),
+                    event_date = COALESCE(@EventDate, event_date),
+                    event_location = COALESCE(@EventLocation, event_location),
+                    event_gogo_price_yen = COALESCE(@EventGoGoPrice, event_gogo_price_yen)
                 WHERE event_id = @EventId
             """;
         await connection.ExecuteAsync(sql, entity);

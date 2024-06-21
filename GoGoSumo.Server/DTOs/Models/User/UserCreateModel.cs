@@ -17,5 +17,5 @@ public class UserCreateModel
     public IEnumerable<string>? UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
     [Required]
-    public string? UserRole { get; set; }
+    public string? RoleName { get; set; }
 }

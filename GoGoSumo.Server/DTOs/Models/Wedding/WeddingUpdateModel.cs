@@ -5,18 +5,13 @@ namespace GoGoSumo.Server.DTOs.Models.Wedding;
 
 public class WeddingUpdateModel
 {
-    [Required]
     public EventUpdateModel? Event { get; set; }
     [MaxLength(100)]
-    [Required]
     public string? WeddingBrideName { get; set; }
     [MaxLength(100)]
-    [Required]
     public string? WeddingGroomName { get; set; }
     [DataType(DataType.Currency)]
-    [Required]
     public float? WeddingBudget { get; set; }
     [Length(32, 32)]
-    [Required]
     public string? WeddingPlannerId { get; set; }
 }

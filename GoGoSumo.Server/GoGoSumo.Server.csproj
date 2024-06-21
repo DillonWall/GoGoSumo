@@ -23,15 +23,6 @@
 
   <ItemGroup>
     <None Remove="Controllers\Controller - Copy.cs.template" />
-    <None Remove="Controllers\Controller.cs.template" />
-    <None Remove="Repositories\Repository.cs.template" />
-    <None Remove="Services\Service.cs.template" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Controllers\Controller.cs.template" />
-    <Compile Include="Repositories\Repository.cs.template" />
-    <Compile Include="Services\Service.cs.template" />
   </ItemGroup>
 
   <ItemGroup>

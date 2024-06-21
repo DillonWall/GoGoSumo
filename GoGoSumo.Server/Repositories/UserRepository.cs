@@ -1,6 +1,6 @@
 ﻿using Dapper;
+using GoGoSumo.Server.DTOs.Entities;
 using GoGoSumo.Server.Helpers;
-using GoGoSumo.Server.Models;
 using Humanizer;
 
 namespace GoGoSumo.Server.Repositories;
@@ -16,13 +16,9 @@ public interface IUserRepository
 
 public class UserRepository : IUserRepository
 {
-    private DataContext _context;
-    public static string SELECT_ALL = """
-            SELECT 
-                u.clerk_id AS ClerkId,
-                u.phone AS Phone,
-                u.fluent_languages AS FluentLanguages,
-                r.role_name AS Role
+    private readonly DataContext _context;
+    private static readonly string SELECT_ALL = """
+            SELECT *
             FROM users u
             JOIN roles r ON r.role_id = u.role_id
         """;
@@ -54,11 +50,11 @@ public class UserRepository : IUserRepository
     {
         using var connection = _context.CreatePostgresConnection();
         var sql = """
-            INSERT INTO users (clerk_id, phone, fluent_languages, role_id)
-            VALUES (@ClerkId, @Phone, @FluentLanguages, (
+            INSERT INTO users
+            VALUES (@ClerkId, @UserPhone, @UserFluentLanguages, (
                 SELECT r.role_id
                 FROM roles r
-                WHERE r.role_name = @Role
+                WHERE r.role_name = @RoleName
             ));
         """;
         await connection.ExecuteAsync(sql, entity);
@@ -69,13 +65,13 @@ public class UserRepository : IUserRepository
         using var connection = _context.CreatePostgresConnection();
         var sql = """
             UPDATE users
-            SET phone = @Phone,
-                fluent_languages = @FluentLanguages,
-                role_id = r.role_id
+            SET user_phone = COALESCE(@UserPhone, user_phone),
+                user_fluent_languages = COALESCE(@UserFluentLanguages, user_fluent_languages),
+                role_id = COALESCE(r.role_id, users.role_id)
             FROM (
                 SELECT role_id
-                FROM roles
-                WHERE role_name = @Role
+                FROM roles 
+                WHERE role_name = @RoleName
             ) AS r
             WHERE clerk_id = @ClerkId
         """;

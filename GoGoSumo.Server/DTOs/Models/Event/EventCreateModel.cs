@@ -14,5 +14,5 @@ public class EventCreateModel
     public string? EventLocation { get; set; }
     [DataType(DataType.Currency)]
     [Required]
-    public float? EventGoGoPrice { get; set; }
+    public decimal? EventGoGoPrice { get; set; }
 }

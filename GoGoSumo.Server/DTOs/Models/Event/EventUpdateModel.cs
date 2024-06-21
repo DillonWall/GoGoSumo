@@ -10,5 +10,5 @@ public class EventUpdateModel
     [MaxLength(255)]
     public string? EventLocation { get; set; }
     [DataType(DataType.Currency)]
-    public float? EventGoGoPrice { get; set; }
+    public decimal? EventGoGoPrice { get; set; }
 }

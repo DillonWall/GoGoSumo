@@ -12,14 +12,16 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddControllers().AddJsonOptions(x =>
-        {
-            // serialize enums as strings in api responses (e.g. UserRole)
-            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        builder.Services
+            .AddControllers()
+            .AddJsonOptions(x =>
+            {
+                // serialize enums as strings in api responses (e.g. UserRole)
+                x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
-            // ignore omitted parameters on models to enable optional params (e.g. User update)
-            x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-        });
+                // ignore omitted parameters on models to enable optional params (e.g. User update)
+                x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            });
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -27,6 +29,9 @@ public class Program
         builder.Services.AddSingleton<DataContext>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IEventRepository, EventRepository>();
+        builder.Services.AddScoped<IWeddingRepository, WeddingRepository>();
+        builder.Services.AddScoped<IWeddingService, WeddingService>();
 
         var app = builder.Build();
 

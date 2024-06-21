@@ -17,24 +17,14 @@ public interface IWeddingRepository
 
 public class WeddingRepository : IWeddingRepository
 {
-    private DataContext _context;
-    private IEventRepository _eventRepository;
-    public static string SELECT_ALL = """
-            SELECT 
-                w.wedding_id AS WeddingId,
-                e.event_id AS EventId,
-                e.event_name AS EventName,
-                e.event_date AS EventDate,
-                e.event_location AS EventLocation,
-                e.event_gogo_price_yen AS EventGoGoPrice,
-                w.wedding_bride_name AS WeddingBrideName,
-                w.wedding_groom_name AS WeddingGroomName,
-                w.wedding_budget_yen AS WeddingBudget,
-                w.wedding_planner_id AS WeddingPlannerId
+    private readonly DataContext _context;
+    private readonly IEventRepository _eventRepository;
+    private static readonly string SELECT_ALL = """
+            SELECT *
             FROM weddings w
-            INNER JOIN events e ON w.event_id = l.event_id
+            LEFT JOIN events e ON w.event_id = e.event_id
         """;
-    public static Func<WeddingEntity, EventEntity, WeddingEntity> map = (we, ee) =>
+    private static readonly Func<WeddingEntity, EventEntity, WeddingEntity> map = (we, ee) =>
     {
         we.Event = ee;
         return we;
@@ -51,7 +41,7 @@ public class WeddingRepository : IWeddingRepository
         using var connection = _context.CreatePostgresConnection();
         var sql = SELECT_ALL;
 
-        return await connection.QueryAsync<WeddingEntity, EventEntity, WeddingEntity>(sql, map);
+        return await connection.QueryAsync<WeddingEntity, EventEntity, WeddingEntity>(sql, map, splitOn: "event_id");
     }
 
     public async Task<WeddingEntity?> GetById(int id)
@@ -61,7 +51,7 @@ public class WeddingRepository : IWeddingRepository
             {0}
             WHERE wedding_id = {1}
         """.FormatWith(SELECT_ALL, id);
-        return (await connection.QueryAsync<WeddingEntity, EventEntity, WeddingEntity>(sql, map)).FirstOrDefault();
+        return (await connection.QueryAsync<WeddingEntity, EventEntity, WeddingEntity>(sql, map, splitOn: "event_id")).FirstOrDefault();
     }
 
     public async Task Create(WeddingEntity entity)
@@ -93,10 +83,10 @@ public class WeddingRepository : IWeddingRepository
         var sql = """
             UPDATE weddings
             SET
-                wedding_bride_name = @WeddingBrideName,
-                wedding_groom_name = @WeddingGroomName,
-                wedding_budget_yen = @WeddingBudget,
-                wedding_planner_id = @WeddingPlannerId
+                wedding_bride_name = COALESCE(@WeddingBrideName, wedding_bride_name), 
+                wedding_groom_name = COALESCE(@WeddingGroomName, wedding_groom_name), 
+                wedding_budget_yen = COALESCE(@WeddingBudget, wedding_budget_yen), 
+                wedding_planner_id = COALESCE(@WeddingPlannerId, wedding_planner_id)
             WHERE wedding_id = @WeddingId
         """;
         await connection.ExecuteAsync(sql, entity);
@@ -114,7 +104,7 @@ public class WeddingRepository : IWeddingRepository
             DELETE FROM events 
             WHERE event_id = (
                 SELECT w.event_id
-                FROM weddings
+                FROM weddings w
                 WHERE w.wedding_id = @id
             );
         """;

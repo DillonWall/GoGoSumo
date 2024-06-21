@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using GoGoSumo.Server.DTOs.Entities;
 using GoGoSumo.Server.DTOs.Models.User;
 using GoGoSumo.Server.Helpers.Exceptions;
-using GoGoSumo.Server.Models;
 using GoGoSumo.Server.Repositories;
 
 namespace GoGoSumo.Server.Services;
