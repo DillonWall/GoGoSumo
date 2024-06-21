@@ -1,0 +1,79 @@
+﻿using Dapper;
+using GoGoSumo.Server.Helpers;
+using Humanizer;
+
+namespace GoGoSumo.Server.Repositories;
+
+public interface IXxxxxRepository
+{
+    Task<IEnumerable<XxxxxEntity>> GetAll();
+    Task<XxxxxEntity?> GetById(int id);
+    Task Create(XxxxxEntity entity);
+    Task Update(XxxxxEntity entity);
+    Task Delete(int id);
+}
+
+public class XxxxxRepository : IXxxxxRepository
+{
+    private DataContext _context;
+    public static string SELECT_ALL = """
+            SELECT 
+                xxxxx_id AS XxxxxId,
+                phone AS Phone
+            FROM xxxxxs
+        """;
+
+    public XxxxxRepository(DataContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IEnumerable<XxxxxEntity>> GetAll()
+    {
+        using var connection = _context.CreatePostgresConnection();
+        var sql = SELECT_ALL;
+
+        return await connection.QueryAsync<XxxxxEntity>(sql);
+    }
+
+    public async Task<XxxxxEntity?> GetById(int id)
+    {
+        using var connection = _context.CreatePostgresConnection();
+        var sql = """
+            {0}
+            WHERE xxxxx_id = @id
+        """.FormatWith(SELECT_ALL);
+        return await connection.QuerySingleOrDefaultAsync<XxxxxEntity?>(sql, new { id });
+    }
+
+    public async Task Create(XxxxxEntity entity)
+    {
+        using var connection = _context.CreatePostgresConnection();
+        var sql = """
+            INSERT INTO xxxxxs (id, phone)
+            VALUES (@Id, @Phone);
+        """;
+        await connection.ExecuteAsync(sql, entity);
+    }
+
+    public async Task Update(XxxxxEntity entity)
+    {
+        using var connection = _context.CreatePostgresConnection();
+        var sql = """
+            UPDATE xxxxxs
+            SET phone = @Phone
+            WHERE xxxxx_id = @Id
+        """;
+        await connection.ExecuteAsync(sql, entity);
+    }
+
+    public async Task Delete(int id)
+    {
+        using var connection = _context.CreatePostgresConnection();
+        var sql = """
+            DELETE FROM xxxxxs 
+            WHERE xxxxx_id = @id
+        """;
+        await connection.ExecuteAsync(sql, new { id });
+    }
+}

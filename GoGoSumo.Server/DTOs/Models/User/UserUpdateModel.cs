@@ -7,9 +7,9 @@ namespace GoGoSumo.Server.DTOs.Models.User;
 public class UserUpdateModel
 {
     [Phone]
-    public string? Phone { get; set; }
+    public string? UserPhone { get; set; }
     [EnumDataTypeArray(typeof(Locale))]
-    public IEnumerable<string>? FluentLanguages { get; set; }
+    public IEnumerable<string>? UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
-    public string? Role { get; set; }
+    public string? UserRole { get; set; }
 }

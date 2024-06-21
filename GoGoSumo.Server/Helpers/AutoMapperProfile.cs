@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using GoGoSumo.Server.DTOs.Entities;
 using GoGoSumo.Server.DTOs.Models.Event;
 using GoGoSumo.Server.DTOs.Models.User;
-using GoGoSumo.Server.Models;
+using GoGoSumo.Server.DTOs.Models.Wedding;
 
 namespace GoGoSumo.Server.Helpers;
 
@@ -11,7 +12,10 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<UserCreateModel, UserEntity>();
         CreateMap<UserUpdateModel, UserEntity>();
-        CreateMap<EventModel, EventEntity>();
+        CreateMap<EventCreateModel, EventEntity>();
+        CreateMap<EventUpdateModel, EventEntity>();
+        CreateMap<WeddingCreateModel, WeddingEntity>();
+        CreateMap<WeddingUpdateModel, WeddingEntity>();
     }
 }
 

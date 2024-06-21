@@ -1,0 +1,49 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace GoGoSumo.Server.Controllers;
+[Route("api/[controller]")]
+[ApiController]
+public class XxxxxController : ControllerBase
+{
+    private IXxxxxService _xxxxxService;
+
+    public XxxxxController(IXxxxxService xxxxxService)
+    {
+        _xxxxxService = xxxxxService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var xxxxxs = await _xxxxxService.GetAll();
+        return Ok(xxxxxs);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
+    {
+        var xxxxxs = await _xxxxxService.GetById(id);
+        return Ok(xxxxxs);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(XxxxxCreateModel model)
+    {
+        await _xxxxxService.Create(model);
+        return Ok(new { message = "Xxxxx created" });
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, XxxxxUpdateModel model)
+    {
+        await _xxxxxService.Update(id, model);
+        return Ok(new { message = "Xxxxx updated" });
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _xxxxxService.Delete(id);
+        return Ok(new { message = "Xxxxx deleted" });
+    }
+}

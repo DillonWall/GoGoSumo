@@ -1,15 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.DTOs.Entities;
+namespace GoGoSumo.Server.DTOs.Models.Event;
 
-public class EventEntity
+public class EventCreateModel
 {
-    public int? EventId { get; set; }
     [MaxLength(100)]
+    [Required]
     public string? EventName { get; set; }
+    [Required]
     public DateOnly? EventDate { get; set; }
     [MaxLength(255)]
+    [Required]
     public string? EventLocation { get; set; }
     [DataType(DataType.Currency)]
+    [Required]
     public float? EventGoGoPrice { get; set; }
 }

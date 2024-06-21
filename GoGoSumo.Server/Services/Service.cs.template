@@ -1,0 +1,77 @@
+﻿using AutoMapper;
+using GoGoSumo.Server.DTOs.Models.Event;
+using GoGoSumo.Server.DTOs.Models.Xxxxx;
+using GoGoSumo.Server.Helpers.Exceptions;
+using GoGoSumo.Server.Repositories;
+
+namespace GoGoSumo.Server.Services;
+
+public interface IXxxxxService
+{
+    Task<IEnumerable<XxxxxEntity>> GetAll();
+    Task<XxxxxEntity> GetById(int id);
+    Task Create(XxxxxCreateModel model);
+    Task Update(int id, XxxxxUpdateModel model);
+    Task Delete(int id);
+}
+
+public class XxxxxService : IXxxxxService
+{
+    private IXxxxxRepository _xxxxxRepository;
+    private readonly IMapper _mapper;
+
+    public XxxxxService(
+        IXxxxxRepository xxxxxRepository,
+        IMapper mapper)
+    {
+        _xxxxxRepository = xxxxxRepository;
+        _mapper = mapper;
+    }
+
+    public async Task<IEnumerable<XxxxxEntity>> GetAll()
+    {
+        return await _xxxxxRepository.GetAll();
+    }
+
+    public async Task<XxxxxEntity> GetById(int id)
+    {
+        XxxxxEntity? entity = await _xxxxxRepository.GetById(id);
+
+        if (entity == null)
+            throw new KeyNotFoundException("Xxxxx not found");
+
+        return entity;
+    }
+
+    public async Task Create(XxxxxCreateModel model)
+    {
+        // map
+        XxxxxEntity entity = _mapper.Map<XxxxxEntity>(model);
+
+        // save xxxxx
+        await _xxxxxRepository.Create(entity);
+    }
+
+    public async Task Update(int id, XxxxxUpdateModel model)
+    {
+        // validate
+        XxxxxEntity? entity = await _xxxxxRepository.GetById(id);
+
+        if (entity == null)
+            throw new KeyNotFoundException("Xxxxx not found");
+
+        if (await _xxxxxRepository.GetById(id) == null)
+            throw new ValidationException("Xxxxx with the id '" + id + "' already exists");
+
+        // copy props to entity
+        _mapper.Map(model, entity);
+
+        // save
+        await _xxxxxRepository.Update(entity);
+    }
+
+    public async Task Delete(int id)
+    {
+        await _xxxxxRepository.Delete(id);
+    }
+}

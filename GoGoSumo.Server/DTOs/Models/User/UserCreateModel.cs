@@ -11,11 +11,11 @@ public class UserCreateModel
     public string? ClerkId { get; set; }
     [Phone]
     [Required]
-    public string? Phone { get; set; }
+    public string? UserPhone { get; set; }
     [EnumDataTypeArray(typeof(Locale))]
     [Required]
-    public IEnumerable<string>? FluentLanguages { get; set; }
+    public IEnumerable<string>? UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
     [Required]
-    public string? Role { get; set; }
+    public string? UserRole { get; set; }
 }

@@ -25,7 +25,7 @@ CREATE TABLE events (
 
 CREATE TABLE weddings (
     wedding_id SERIAL PRIMARY KEY,
-    event_id INT REFERENCES events(event_id),
+    event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
     wedding_bride_name VARCHAR(100),
     wedding_groom_name VARCHAR(100),
     wedding_budget_yen DECIMAL(13, 2),
@@ -34,7 +34,7 @@ CREATE TABLE weddings (
 
 CREATE TABLE tours (
 	tour_id SERIAL PRIMARY KEY,
-	event_id INT REFERENCES events(event_id),
+	event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
 	tour_guide_id VARCHAR(32)
 );
 

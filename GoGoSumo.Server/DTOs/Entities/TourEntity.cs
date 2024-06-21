@@ -1,17 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.DTOs.Models.Event;
+namespace GoGoSumo.Server.DTOs.Entities;
 
 public class TourEntity
 {
-    public int? Id { get; set; }
-    [MaxLength(100)]
-    public string? Name { get; set; }
-    public DateOnly? Date { get; set; }
-    [MaxLength(255)]
-    public string? Location { get; set; }
-    [DataType(DataType.Currency)]
-    public float? GoGoPrice { get; set; }
+    public int? TourId { get; set; }
+    public EventEntity? Event { get; set; }
     [Length(32, 32)]
     public string? TourGuideId { get; set; }
 }
