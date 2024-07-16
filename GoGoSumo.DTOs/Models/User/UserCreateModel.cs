@@ -1,22 +1,21 @@
-using GoGoSumo.Server.Helpers.Annotations;
-using GoGoSumo.Server.Helpers.Mappers;
-using GoGoSumo.Server.Models.Enums;
+using GoGoSumo.DTOs.Enums;
+using GoGoSumo.DTOs.Helpers.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.DTOs.Entities;
+namespace GoGoSumo.DTOs.Models.User;
 
-public class UserEntity
+public class UserCreateModel
 {
     [Length(32, 32)]
-    [Column("clerk_id")]
+    [Required]
     public string? ClerkId { get; set; }
     [Phone]
-    [Column("user_phone")]
+    [Required]
     public string? UserPhone { get; set; }
     [EnumDataTypeArray(typeof(Locale))]
-    [Column("user_fluent_languages")]
+    [Required]
     public IEnumerable<string>? UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
-    [Column("role_name")]
+    [Required]
     public string? RoleName { get; set; }
 }

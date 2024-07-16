@@ -1,8 +1,8 @@
-using GoGoSumo.Server.Helpers.Annotations;
-using GoGoSumo.Server.Models.Enums;
+using GoGoSumo.DTOs.Enums;
+using GoGoSumo.DTOs.Helpers.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.DTOs.Models.User;
+namespace GoGoSumo.DTOs.Models.User;
 
 public class UserUpdateModel
 {

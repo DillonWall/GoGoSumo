@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Dapper;
-using GoGoSumo.Server.DTOs.Entities;
-using GoGoSumo.Server.DTOs.Models.Event;
-using GoGoSumo.Server.DTOs.Models.User;
-using GoGoSumo.Server.DTOs.Models.Wedding;
+using GoGoSumo.DTOs.Entities;
+using GoGoSumo.DTOs.Helpers.DataAnnotations;
+using GoGoSumo.DTOs.Models.Event;
+using GoGoSumo.DTOs.Models.User;
+using GoGoSumo.DTOs.Models.Wedding;
 
-namespace GoGoSumo.Server.Helpers.Mappers;
+namespace GoGoSumo.Server.Helpers;
 
 public class AutoMapperProfile : Profile
 {

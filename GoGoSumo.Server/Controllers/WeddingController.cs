@@ -1,4 +1,4 @@
-﻿using GoGoSumo.Server.DTOs.Models.Wedding;
+﻿using GoGoSumo.DTOs.Models.Wedding;
 using GoGoSumo.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 

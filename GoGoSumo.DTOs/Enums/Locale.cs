@@ -1,4 +1,4 @@
-﻿namespace GoGoSumo.Server.Models.Enums;
+﻿namespace GoGoSumo.DTOs.Enums;
 
 public enum Locale
 {

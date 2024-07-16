@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using GoGoSumo.Server.DTOs.Entities;
+using GoGoSumo.DTOs.Entities;
 using GoGoSumo.Server.Helpers;
 using Humanizer;
 using System.Data;

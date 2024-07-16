@@ -1,7 +1,7 @@
-using GoGoSumo.Server.Helpers.Mappers;
+using GoGoSumo.DTOs.Helpers.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.DTOs.Entities;
+namespace GoGoSumo.DTOs.Entities;
 
 public class WeddingEntity
 {

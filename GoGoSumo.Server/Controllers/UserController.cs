@@ -1,4 +1,4 @@
-﻿using GoGoSumo.Server.DTOs.Models.User;
+﻿using GoGoSumo.DTOs.Models.User;
 using GoGoSumo.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 

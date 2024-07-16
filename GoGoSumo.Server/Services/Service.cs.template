@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using GoGoSumo.Server.DTOs.Models.Event;
-using GoGoSumo.Server.DTOs.Models.Xxxxx;
+using GoGoSumo.DTOs.Models.Event;
+using GoGoSumo.DTOs.Models.Xxxxx;
 using GoGoSumo.Server.Helpers.Exceptions;
 using GoGoSumo.Server.Repositories;
 

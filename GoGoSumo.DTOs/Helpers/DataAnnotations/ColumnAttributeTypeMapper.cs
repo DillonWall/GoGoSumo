@@ -5,7 +5,7 @@
 using Dapper;
 using System.Reflection;
 
-namespace GoGoSumo.Server.Helpers.Mappers;
+namespace GoGoSumo.DTOs.Helpers.DataAnnotations;
 
 /// <summary>
 /// Uses the Name value of the <see cref="ColumnAttribute"/> specified to determine
@@ -39,7 +39,7 @@ public class ColumnAttributeTypeMapper<T> : FallbackTypeMapper
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class ColumnAttribute : Attribute
 {
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute]
+    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
     public ColumnAttribute(string name) : base()
     {
         Name = name;

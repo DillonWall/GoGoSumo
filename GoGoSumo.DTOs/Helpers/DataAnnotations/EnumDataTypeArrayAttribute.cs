@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoGoSumo.Server.Helpers.Annotations;
+namespace GoGoSumo.DTOs.Helpers.DataAnnotations;
 
 // Ref: https://stackoverflow.com/questions/31760687/how-to-validate-an-array-of-type-enum-with-enumdatatype-using-data-annotations-w
 

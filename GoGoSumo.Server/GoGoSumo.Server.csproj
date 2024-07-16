@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Models\Tour\" />
+    <ProjectReference Include="..\GoGoSumo.DTOs\GoGoSumo.DTOs.csproj" />
   </ItemGroup>
 
 </Project>
