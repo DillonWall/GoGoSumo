@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "gogosumo.client", "gogosumo.client\gogosumo.client.esproj", "{08A1DE18-A1E6-46DA-849A-777F2F982595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoGoSumo.DTOs", "GoGoSumo.DTOs\GoGoSumo.DTOs.csproj", "{4773D9B2-FC7B-44BB-AB31-B5223415867D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoGoSumo.DTOs", "GoGoSumo.DTOs\GoGoSumo.DTOs.csproj", "{4773D9B2-FC7B-44BB-AB31-B5223415867D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoGoSumo.Server.UnitTests", "GoGoSumo.Server.UnitTests\GoGoSumo.Server.UnitTests.csproj", "{0BEB3A58-9E11-460E-93A3-30C3264EC3FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{4773D9B2-FC7B-44BB-AB31-B5223415867D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4773D9B2-FC7B-44BB-AB31-B5223415867D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4773D9B2-FC7B-44BB-AB31-B5223415867D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BEB3A58-9E11-460E-93A3-30C3264EC3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEB3A58-9E11-460E-93A3-30C3264EC3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEB3A58-9E11-460E-93A3-30C3264EC3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEB3A58-9E11-460E-93A3-30C3264EC3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
