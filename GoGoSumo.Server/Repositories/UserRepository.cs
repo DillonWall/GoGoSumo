@@ -1,5 +1,4 @@
-﻿using Dapper;
-using GoGoSumo.DTOs.Entities;
+﻿using GoGoSumo.DTOs.Entities;
 using GoGoSumo.Server.Helpers;
 using Humanizer;
 
@@ -16,54 +15,54 @@ public interface IUserRepository
 
 public class UserRepository : IUserRepository
 {
-    private readonly DataContext _context;
-    private static readonly string SELECT_ALL = """
+    private const string SELECT_ALL_SQL = @"
             SELECT *
             FROM users u
-            JOIN roles r ON r.role_id = u.role_id
-        """;
+            JOIN roles r ON r.role_id = u.role_id";
 
-    public UserRepository(DataContext context)
+    private readonly DataContext _context;
+    private readonly ILogger<UserRepository> _logger;
+
+    public UserRepository(DataContext context, ILogger<UserRepository> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<UserEntity>> GetAll()
     {
-        using var connection = _context.CreatePostgresConnection();
-        var sql = SELECT_ALL;
+        string sql = SELECT_ALL_SQL;
 
-        return await connection.QueryAsync<UserEntity>(sql);
+        return await _context.WithSql(sql).QueryMultipleAsync<UserEntity>();
     }
 
     public async Task<UserEntity?> GetById(string clerk_id)
     {
-        using var connection = _context.CreatePostgresConnection();
-        var sql = """
+        string sql = @"
             {0}
-            WHERE clerk_id = @clerk_id
-        """.FormatWith(SELECT_ALL);
-        return await connection.QuerySingleOrDefaultAsync<UserEntity?>(sql, new { clerk_id });
+            WHERE clerk_id = @clerk_id;
+        ".FormatWith(SELECT_ALL_SQL);
+
+        return await _context.WithSql(sql).WithParams(new { clerk_id }).QuerySingleAsync<UserEntity>();
     }
 
     public async Task Create(UserEntity entity)
     {
-        using var connection = _context.CreatePostgresConnection();
-        var sql = """
+        string sql = @"
             INSERT INTO users
             VALUES (@ClerkId, @UserPhone, @UserFluentLanguages, (
                 SELECT r.role_id
                 FROM roles r
                 WHERE r.role_name = @RoleName
             ));
-        """;
-        await connection.ExecuteAsync(sql, entity);
+        ";
+
+        await _context.WithSql(sql).WithParams(entity).ExecuteAsync();
     }
 
     public async Task Update(UserEntity entity)
     {
-        using var connection = _context.CreatePostgresConnection();
-        var sql = """
+        string sql = @"
             UPDATE users
             SET user_phone = COALESCE(@UserPhone, user_phone),
                 user_fluent_languages = COALESCE(@UserFluentLanguages, user_fluent_languages),
@@ -74,17 +73,18 @@ public class UserRepository : IUserRepository
                 WHERE role_name = @RoleName
             ) AS r
             WHERE clerk_id = @ClerkId
-        """;
-        await connection.ExecuteAsync(sql, entity);
+        ";
+
+        await _context.WithSql(sql).WithParams(entity).ExecuteAsync();
     }
 
     public async Task Delete(string clerk_id)
     {
-        using var connection = _context.CreatePostgresConnection();
-        var sql = """
+        string sql = @"
             DELETE FROM users 
             WHERE clerk_id = @clerk_id
-        """;
-        await connection.ExecuteAsync(sql, new { clerk_id });
+        ";
+
+        await _context.WithSql(sql).WithParams(new { clerk_id }).ExecuteAsync();
     }
 }
