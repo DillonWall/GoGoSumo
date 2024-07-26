@@ -1,4 +1,5 @@
-﻿using GoGoSumo.DTOs.Models.User;
+﻿using GoGoSumo.DTOs.Entities;
+using GoGoSumo.DTOs.Models.User;
 using GoGoSumo.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +18,14 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var users = await _userService.GetAll();
+        IEnumerable<UserEntity> users = await _userService.GetAll();
         return Ok(users);
     }
 
     [HttpGet("{clerk_id}")]
     public async Task<IActionResult> GetById(string clerk_id)
     {
-        var user = await _userService.GetById(clerk_id);
+        UserEntity user = await _userService.GetById(clerk_id);
         return Ok(user);
     }
 
