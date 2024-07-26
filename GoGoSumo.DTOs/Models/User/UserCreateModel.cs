@@ -8,14 +8,14 @@ public class UserCreateModel
 {
     [Length(32, 32)]
     [Required]
-    public string? ClerkId { get; set; }
+    public required string ClerkId { get; set; }
     [Phone]
     [Required]
-    public string? UserPhone { get; set; }
+    public required string UserPhone { get; set; }
     [EnumDataTypeArray(typeof(Locale))]
     [Required]
-    public IEnumerable<string>? UserFluentLanguages { get; set; }
+    public required IEnumerable<string> UserFluentLanguages { get; set; }
     [EnumDataType(typeof(UserRole))]
     [Required]
-    public string? RoleName { get; set; }
+    public required string RoleName { get; set; }
 }
