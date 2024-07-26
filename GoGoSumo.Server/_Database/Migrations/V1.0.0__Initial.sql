@@ -10,11 +10,6 @@ CREATE TABLE users (
 	role_id INT REFERENCES roles(role_id)
 );
 
-INSERT INTO roles (role_name) VALUES
-    ('Customer'),
-    ('Guide'),
-    ('WeddingPlanner');
-
 CREATE TABLE events (
 	event_id SERIAL PRIMARY KEY,
 	event_name VARCHAR(100),
@@ -43,6 +38,12 @@ CREATE TABLE tour_customers (
 	customer_id VARCHAR(32) REFERENCES users(clerk_id)
 );
 
+
+
+INSERT INTO roles (role_name) VALUES
+    ('Customer'),
+    ('Guide'),
+    ('WeddingPlanner');
 
 INSERT INTO users (clerk_id, user_phone, user_fluent_languages, role_id)
 VALUES
