@@ -3,6 +3,7 @@ using GoGoSumo.DTOs.Entities;
 using GoGoSumo.DTOs.Models.Wedding;
 using GoGoSumo.Server.Helpers.Exceptions;
 using GoGoSumo.Server.Repositories;
+using Humanizer;
 
 namespace GoGoSumo.Server.Services;
 
@@ -11,7 +12,7 @@ public interface IWeddingService
     Task<IEnumerable<WeddingEntity>> GetAll();
     Task<WeddingEntity> GetById(int id);
     Task Create(WeddingCreateModel model);
-    Task Update(int id, WeddingUpdateModel model);
+    Task Update(WeddingUpdateModel model);
     Task Delete(int id);
 }
 
@@ -38,35 +39,27 @@ public class WeddingService : IWeddingService
         WeddingEntity? entity = await _weddingRepository.GetById(id);
 
         if (entity == null)
-            throw new KeyNotFoundException("Wedding not found");
+            throw new KeyAlreadyExistsException("Wedding not found with id {id}".FormatWith(id));
 
         return entity;
     }
 
     public async Task Create(WeddingCreateModel model)
     {
-        // map
         WeddingEntity entity = _mapper.Map<WeddingEntity>(model);
 
-        // save wedding
         await _weddingRepository.Create(entity);
     }
 
-    public async Task Update(int id, WeddingUpdateModel model)
+    public async Task Update(WeddingUpdateModel model)
     {
-        // validate
-        WeddingEntity? entity = await _weddingRepository.GetById(id);
+        WeddingEntity? entity = await _weddingRepository.GetById(model.WeddingId);
 
         if (entity == null)
-            throw new KeyNotFoundException("Wedding not found");
+            throw new KeyAlreadyExistsException("Wedding not found with id {id}".FormatWith(model.WeddingId));
 
-        if (await _weddingRepository.GetById(id) == null)
-            throw new ValidationException("Wedding with the id '" + id + "' already exists");
-
-        // copy props to entity
         _mapper.Map(model, entity);
 
-        // save
         await _weddingRepository.Update(entity);
     }
 

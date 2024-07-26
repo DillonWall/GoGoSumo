@@ -6,6 +6,9 @@ namespace GoGoSumo.DTOs.Models.User;
 
 public class UserUpdateModel
 {
+    [Length(32, 32)]
+    [Required]
+    public required string ClerkId { get; set; }
     [Phone]
     public string? UserPhone { get; set; }
     [EnumDataTypeArray(typeof(Locale))]

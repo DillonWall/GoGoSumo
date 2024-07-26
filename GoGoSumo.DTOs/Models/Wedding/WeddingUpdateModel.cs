@@ -5,6 +5,8 @@ namespace GoGoSumo.DTOs.Models.Wedding;
 
 public class WeddingUpdateModel
 {
+    [Required]
+    public required int WeddingId { get; set; }
     public EventUpdateModel? Event { get; set; }
     [MaxLength(100)]
     public string? WeddingBrideName { get; set; }

@@ -36,10 +36,10 @@ public class UserController : ControllerBase
         return Ok(new { message = "User created" });
     }
 
-    [HttpPut("{clerk_id}")]
-    public async Task<IActionResult> Update(string clerk_id, UserUpdateModel model)
+    [HttpPut]
+    public async Task<IActionResult> Update(UserUpdateModel model)
     {
-        await _userService.Update(clerk_id, model);
+        await _userService.Update(model);
         return Ok(new { message = "User updated" });
     }
 

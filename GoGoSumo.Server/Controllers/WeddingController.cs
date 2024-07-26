@@ -36,9 +36,9 @@ public class WeddingController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, WeddingUpdateModel model)
+    public async Task<IActionResult> Update(WeddingUpdateModel model)
     {
-        await _weddingService.Update(id, model);
+        await _weddingService.Update(model);
         return Ok(new { message = "Wedding updated" });
     }
 

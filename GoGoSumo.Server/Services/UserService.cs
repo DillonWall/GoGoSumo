@@ -3,6 +3,7 @@ using GoGoSumo.DTOs.Entities;
 using GoGoSumo.DTOs.Models.User;
 using GoGoSumo.Server.Helpers.Exceptions;
 using GoGoSumo.Server.Repositories;
+using Humanizer;
 
 namespace GoGoSumo.Server.Services;
 
@@ -11,7 +12,7 @@ public interface IUserService
     Task<IEnumerable<UserEntity>> GetAll();
     Task<UserEntity> GetById(string clerk_id);
     Task Create(UserCreateModel model);
-    Task Update(string clerk_id, UserUpdateModel model);
+    Task Update(UserUpdateModel model);
     Task Delete(string clerk_id);
 }
 
@@ -38,39 +39,30 @@ public class UserService : IUserService
         UserEntity? entity = await _userRepository.GetById(clerk_id);
 
         if (entity == null)
-            throw new KeyNotFoundException("User not found");
+            throw new KeyNotFoundException("User not found with clerk id {ClerkId}".FormatWith(clerk_id));
 
         return entity;
     }
 
     public async Task Create(UserCreateModel model)
     {
-        // validate
-        if (await _userRepository.GetById(model.ClerkId!) != null)
-            throw new ValidationException("User with the Clerk user_id '" + model.ClerkId + "' already exists");
+        if (await _userRepository.GetById(model.ClerkId) != null)
+            throw new KeyAlreadyExistsException("User with the Clerk user_id {ClerkId} already exists".FormatWith(model.ClerkId));
 
-        // map
         UserEntity entity = _mapper.Map<UserEntity>(model);
 
-        // save user
         await _userRepository.Create(entity);
     }
 
-    public async Task Update(string clerk_id, UserUpdateModel model)
+    public async Task Update(UserUpdateModel model)
     {
-        // validate
-        UserEntity? entity = await _userRepository.GetById(clerk_id);
+        UserEntity? entity = await _userRepository.GetById(model.ClerkId);
 
         if (entity == null)
-            throw new KeyNotFoundException("User not found");
+            throw new KeyNotFoundException("User not found with clerk id {ClerkId}".FormatWith(model.ClerkId));
 
-        if (await _userRepository.GetById(clerk_id) == null)
-            throw new ValidationException("User with the Clerk user_id '" + clerk_id + "' already exists");
-
-        // copy props to entity
         _mapper.Map(model, entity);
 
-        // save
         await _userRepository.Update(entity);
     }
 
