@@ -8,10 +8,6 @@ using Moq;
 namespace GoGoSumo.Server.UnitTests.Controllers;
 public class UserControllerTests
 {
-    private const string EXAMPLE_CLERK_ID = "11112222333344441111222233334444";
-    private const string EXAMPLE_PHONE_NUMBER = "123-456-7890";
-    private const string EXAMPLE_LOCALE = "EN";
-    private const string EXAMPLE_ROLE = "Customer";
 
     [Fact]
     public async Task GetAll_ReturnsListOfUserEntity()
@@ -43,23 +39,12 @@ public class UserControllerTests
     {
         var users = new List<UserEntity>
         {
-            CreateUser(),
-            CreateUser(),
-            CreateUser(),
+            UnitTestDTOHelpers.CreateUserEntity(),
+            UnitTestDTOHelpers.CreateUserEntity(),
+            UnitTestDTOHelpers.CreateUserEntity(),
         };
 
         return users;
-    }
-
-    private UserEntity CreateUser()
-    {
-        return new UserEntity
-        {
-            ClerkId = EXAMPLE_CLERK_ID,
-            UserPhone = EXAMPLE_PHONE_NUMBER,
-            UserFluentLanguages = new string[] { EXAMPLE_LOCALE },
-            RoleName = EXAMPLE_ROLE,
-        };
     }
 
     [Fact]
@@ -68,7 +53,7 @@ public class UserControllerTests
         // Arrange
         var mockUserService = GetMockUserService_WhereGetByIdReturnsUser();
         var userController = new UserController(mockUserService.Object);
-        var id = EXAMPLE_CLERK_ID;
+        var id = UnitTestDTOHelpers.EXAMPLE_CLERK_ID;
 
         // Act
         var okObjectResult = await userController.GetById(id) as OkObjectResult;
@@ -84,7 +69,7 @@ public class UserControllerTests
 
         mockUserService
             .Setup(session => session.GetById(It.IsAny<string>()))
-            .ReturnsAsync(CreateUser());
+            .ReturnsAsync(UnitTestDTOHelpers.CreateUserEntity());
 
         return mockUserService;
     }
@@ -93,7 +78,7 @@ public class UserControllerTests
     public async Task Create_WhenGivenModel_ReturnsUserCreated()
     {
         // Arrange
-        var userCreateModel = CreateUserCreateModel();
+        var userCreateModel = UnitTestDTOHelpers.CreateUserCreateModel();
         var mockUserService = GetMockUserService_WhereCreateDoesNothing();
         var userController = new UserController(mockUserService.Object);
 
@@ -110,7 +95,7 @@ public class UserControllerTests
     public async Task Create_WhenGivenModel_CallsUserServiceCreateOnce()
     {
         // Arrange
-        var userCreateModel = CreateUserCreateModel();
+        var userCreateModel = UnitTestDTOHelpers.CreateUserCreateModel();
         var mockUserService = GetMockUserService_WhereCreateDoesNothing();
         var userController = new UserController(mockUserService.Object);
 
@@ -119,17 +104,6 @@ public class UserControllerTests
 
         // Assert
         mockUserService.Verify(service => service.Create(userCreateModel), Times.Once());
-    }
-
-    private UserCreateModel CreateUserCreateModel()
-    {
-        return new UserCreateModel
-        {
-            ClerkId = EXAMPLE_CLERK_ID,
-            UserPhone = EXAMPLE_PHONE_NUMBER,
-            UserFluentLanguages = new string[] { EXAMPLE_LOCALE },
-            RoleName = EXAMPLE_ROLE,
-        };
     }
 
     private Mock<IUserService> GetMockUserService_WhereCreateDoesNothing()
@@ -147,7 +121,7 @@ public class UserControllerTests
     public async Task Update_WhenGivenModel_ReturnsUserUpdated()
     {
         // Arrange
-        var userUpdateModel = CreateUserUpdateModel();
+        var userUpdateModel = UnitTestDTOHelpers.CreateUserUpdateModel();
         var mockUserService = GetMockUserService_WhereUpdateDoesNothing();
         var userController = new UserController(mockUserService.Object);
 
@@ -164,7 +138,7 @@ public class UserControllerTests
     public async Task Update_WhenGivenModel_CallsUserServiceUpdateOnce()
     {
         // Arrange
-        var userUpdateModel = CreateUserUpdateModel();
+        var userUpdateModel = UnitTestDTOHelpers.CreateUserUpdateModel();
         var mockUserService = GetMockUserService_WhereUpdateDoesNothing();
         var userController = new UserController(mockUserService.Object);
 
@@ -173,17 +147,6 @@ public class UserControllerTests
 
         // Assert
         mockUserService.Verify(service => service.Update(userUpdateModel), Times.Once());
-    }
-
-    private UserUpdateModel CreateUserUpdateModel()
-    {
-        return new UserUpdateModel
-        {
-            ClerkId = EXAMPLE_CLERK_ID,
-            UserPhone = EXAMPLE_PHONE_NUMBER,
-            UserFluentLanguages = new string[] { EXAMPLE_LOCALE },
-            RoleName = EXAMPLE_ROLE,
-        };
     }
 
     private Mock<IUserService> GetMockUserService_WhereUpdateDoesNothing()
@@ -203,7 +166,7 @@ public class UserControllerTests
         // Arrange
         var mockUserService = GetMockUserService_WhereDeleteDoesNothing();
         var userController = new UserController(mockUserService.Object);
-        var id = EXAMPLE_CLERK_ID;
+        var id = UnitTestDTOHelpers.EXAMPLE_CLERK_ID;
 
         // Act
         var okObjectResult = await userController.Delete(id) as OkObjectResult;
@@ -221,7 +184,7 @@ public class UserControllerTests
         // Arrange
         var mockUserService = GetMockUserService_WhereDeleteDoesNothing();
         var userController = new UserController(mockUserService.Object);
-        var id = EXAMPLE_CLERK_ID;
+        var id = UnitTestDTOHelpers.EXAMPLE_CLERK_ID;
 
         // Act
         await userController.Delete(id);

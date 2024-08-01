@@ -1,5 +1,5 @@
 ﻿namespace GoGoSumo.Server.UnitTests;
-public static class UnitTestHelpers
+public static class UnitTestExtensionMethods
 {
     public static PropType? GetPropertyByName<PropType>(this object obj, string property)
     {
