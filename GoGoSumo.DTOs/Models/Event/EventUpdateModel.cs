@@ -4,6 +4,8 @@ namespace GoGoSumo.DTOs.Models.Event;
 
 public class EventUpdateModel
 {
+    [Required]
+    public required int EventId { get; set; }
     [MaxLength(100)]
     public string? EventName { get; set; }
     public DateOnly? EventDate { get; set; }

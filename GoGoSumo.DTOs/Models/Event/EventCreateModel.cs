@@ -4,6 +4,7 @@ namespace GoGoSumo.DTOs.Models.Event;
 
 public class EventCreateModel
 {
+    public readonly int? EventId = null;
     [MaxLength(100)]
     [Required]
     public required string EventName { get; set; }

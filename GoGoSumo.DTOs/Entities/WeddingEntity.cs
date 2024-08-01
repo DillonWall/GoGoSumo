@@ -16,7 +16,7 @@ public class WeddingEntity
     public string? WeddingGroomName { get; set; }
     [DataType(DataType.Currency)]
     [Column("wedding_budget")]
-    public float? WeddingBudget { get; set; }
+    public decimal? WeddingBudget { get; set; }
     [Length(32, 32)]
     [Column("wedding_planner_id")]
     public string? WeddingPlannerId { get; set; }

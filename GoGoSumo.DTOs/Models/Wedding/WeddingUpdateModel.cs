@@ -13,7 +13,7 @@ public class WeddingUpdateModel
     [MaxLength(100)]
     public string? WeddingGroomName { get; set; }
     [DataType(DataType.Currency)]
-    public float? WeddingBudget { get; set; }
+    public decimal? WeddingBudget { get; set; }
     [Length(32, 32)]
     public string? WeddingPlannerId { get; set; }
 }
