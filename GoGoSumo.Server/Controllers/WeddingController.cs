@@ -22,7 +22,7 @@ public class WeddingController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> GetById(int id)
     {
         var weddings = await _weddingService.GetById(id);
         return Ok(weddings);
