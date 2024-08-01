@@ -7,11 +7,11 @@
 - [x] <strike> Setup docker </strike>
 - [x] <strike> Add some basic REST API routes and structure according to Clean Architecture </strike>
 - [x] <strike> Setup basic frontend with clerk integration </strike>
-- [x] Cover some classes with unit tests to prepare for GitHub actions integration
+- [x] <strike> Cover some classes with unit tests to prepare for GitHub actions integration </strike>
+- [ ] Host on Azure App Service
 - [ ] Integrate into GitHub actions
 - [ ] Cover all classes up until now with Unit Tests to prepare for TDD
 - [ ] Design and build the frontend to link up to the backend
-- [ ] Host on Azure App Service
 - [ ] Iteratively improve and add new features using TDD
 
 ## Contents
