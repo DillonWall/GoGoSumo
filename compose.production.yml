@@ -1,0 +1,63 @@
+services:
+  client:
+    image: zyphex/gogosumo-client
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
+    depends_on:
+      - server
+
+  server:
+    image: zyphex/gogosumo-server
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5333:8080
+    depends_on:
+      - flyway
+
+  flyway:
+    image: flyway/flyway
+    command: -connectRetries=60 migrate
+    volumes:
+      - ./GoGoSumo.Database/Migrations:/flyway/sql
+      - ./GoGoSumo.Database:/flyway/conf
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - 15432:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    restart: always
+    user: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=gogosumo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+  pgadmin-data:
