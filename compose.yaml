@@ -1,14 +1,22 @@
-# To set the database password: 
-# You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker compose up`.
-
 services:
+  client:
+    build:
+      context: ./gogosumo.client
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+
   server:
     build:
       context: .
       target: final
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - 8080:8080
+      - 5333:8080
     depends_on:
       - flyway
 
@@ -16,8 +24,8 @@ services:
     image: flyway/flyway
     command: -connectRetries=60 migrate
     volumes:
-      - ./_Database/Migrations:/flyway/sql
-      - ./_Database:/flyway/conf
+      - ./GoGoSumo.Database/Migrations:/flyway/sql
+      - ./GoGoSumo.Database:/flyway/conf
     depends_on:
       postgres:
         condition: service_healthy
@@ -48,7 +56,7 @@ services:
     ports:
       - 5432:5432
     healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      test: ["CMD", "pg_isready", "-q", "-U", "postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -56,4 +64,3 @@ services:
 volumes:
   postgres-data:
   pgadmin-data:
-
