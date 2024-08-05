@@ -1,19 +1,14 @@
 ### Building and running your application
 
-When you're ready, start your application by running:
-`docker compose up --build`.
-
-Your application will be available at http://localhost:5333.
-
 ### Deploying your application to the cloud
 
 First, build your image.
 If your cloud uses a different CPU architecture than your development
 machine (e.g., you are on a Mac M1 and your cloud provider is amd64),
 you'll want to build the image for that platform, e.g.:
-`docker build --platform=linux/amd64 -t gogosumo-server:v1.0.0 .`.
+`docker build --platform=linux/amd64 -t gogosumo-client:v1.0.0 .`.
 
-Then, push it to your registry, e.g. `docker push gogosumocontainerregistry.azurecr.io/gogosumo-server:v1.0.0`.
+Then, push it to your registry, e.g. `docker push gogosumocontainerregistry.azurecr.io/gogosumo-client:v1.0.0`.
 
 Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharing/)
 docs for more detail on building and pushing.
