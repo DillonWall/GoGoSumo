@@ -42,27 +42,20 @@ jobs:
         with:
           push: true
           tags: zyphex/gogosumo-server:latest
+create_new_container:
+  needs: publish_to_docker
+  runs-on: ubuntu-latest
+  steps:
+    - name: executing remote ssh commands using private key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          wget https://raw.githubusercontent.com/DillonWall/GoGoSumo/main/compose.prod.yml
+          sudo docker compose up -d
 
-      # - name: Build and push client
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: "{{defaultContext}}:gogosumo.client"
-      #     push: true
-      #     tags: zyphex/gogosumo/gogosumo-client:latest
-#  TODO: WIP
-# create_new_container:
-#   needs: publish_to_docker
-#   runs-on: ubuntu-latest
-#   steps:
-#   - name: executing remote ssh commands using private key
-#     uses: appleboy/ssh-action@master
-#     with:
-#       host: ${{ secrets.SSH_HOST }}
-#       username: ${{ secrets.SSH_USERNAME }}
-#       key: ${{ secrets.SSH_KEY }}
-#       script: |
-#         sudo docker rm -f $(docker ps -aq -f name=gogosumo-server)
-#         sudo docker rmi $(docker images | grep 'zyphex/gogosumo' | awk '{print $3}')
-#         wget https://raw.githubusercontent.com/DillonWall/GoGoSumo/main/compose.yml
-#         docker pull zyphex/gogosumo
-#         sudo docker compose up -d
+# sudo docker rm -f $(docker ps -aq -f name=gogosumo-server)
+# sudo docker rmi $(docker images | grep 'zyphex/gogosumo' | awk '{print $3}')
+# docker pull zyphex/gogosumo
