@@ -6,6 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
+      - 7049:7049
       - 5333:8080
     depends_on:
       - flyway
