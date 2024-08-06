@@ -20,11 +20,11 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        working-directory: ./github_docker_deploy
+        working-directory: ./GoGoSumo.Server
         run: dotnet build --configuration Release
 
       - name: Run Tests
-        working-directory: ./github_docker_deploy
+        working-directory: ./GoGoSumo.Server
         run: dotnet test
 
   publish_to_docker:
