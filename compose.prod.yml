@@ -1,12 +1,5 @@
 services:
-  client:
-    image: zyphex/gogosumo-client
-    environment:
-      NODE_ENV: production
-    ports:
-      - 8080:8080
-    depends_on:
-      - server
+  # the client is hosted separately, it is excluded from the server VM
 
   server:
     image: zyphex/gogosumo-server
