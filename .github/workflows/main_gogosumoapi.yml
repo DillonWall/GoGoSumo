@@ -41,14 +41,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: zyphex/gogosumo/gogosumo-server:latest
+          tags: zyphex/gogosumo-server:latest
 
-      - name: Build and push client
-        uses: docker/build-push-action@v2
-        with:
-          context: "{{defaultContext}}:gogosumo.client"
-          push: true
-          tags: zyphex/gogosumo/gogosumo-client:latest
+      # - name: Build and push client
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: "{{defaultContext}}:gogosumo.client"
+      #     push: true
+      #     tags: zyphex/gogosumo/gogosumo-client:latest
 #  TODO: WIP
 # create_new_container:
 #   needs: publish_to_docker
