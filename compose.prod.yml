@@ -3,8 +3,6 @@ services:
 
   server:
     image: zyphex/gogosumo-server
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 5333:8080
     depends_on:
