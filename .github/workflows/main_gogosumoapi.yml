@@ -54,7 +54,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             wget https://raw.githubusercontent.com/DillonWall/GoGoSumo/main/compose.prod.yml
-            sudo docker compose up -d
+            sudo docker compose up -d -f compose.prod.yml
 
 # sudo docker rm -f $(docker ps -aq -f name=gogosumo-server)
 # sudo docker rmi $(docker images | grep 'zyphex/gogosumo' | awk '{print $3}')
