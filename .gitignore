@@ -402,3 +402,5 @@ obj
 gogosumo.client/.env
 *.pem
 *.ppk
+deploy/flyway.prod.conf
+deploy/env.prod.db

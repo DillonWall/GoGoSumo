@@ -53,10 +53,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            rm -f compose.prod.yml
-            wget https://raw.githubusercontent.com/DillonWall/GoGoSumo/main/compose.prod.yml
-            sudo docker compose -f compose.prod.yml up -d
-
-# sudo docker rm -f $(docker ps -aq -f name=gogosumo-server)
-# sudo docker rmi $(docker images | grep 'zyphex/gogosumo' | awk '{print $3}')
-# docker pull zyphex/gogosumo
+            cd ~/GoGoSumo
+            git pull
+            sudo docker compose -f compose.prod.yml --env-file ./deploy/env.prod.db up -d
