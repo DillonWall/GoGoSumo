@@ -1,6 +1,8 @@
 # GoGoSumo
 .NET Core + React + Vite - Fullstack application for a Japan travel guide services site
 
+Check out the live site: https://polite-mushroom-0e52d7700.5.azurestaticapps.net
+
 ## Status
 - [x] <strike> Initial system and database design </strike>
 - [x] <strike> Initial project and dev environment setup </strike>
