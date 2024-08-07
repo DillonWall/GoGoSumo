@@ -1,7 +1,5 @@
 name: Build and deploy ASP.Net Core app to Azure VM - GoGoSumo.Server
 
-environment: production
-
 on:
   push:
     branches:
@@ -47,6 +45,8 @@ jobs:
   create_new_container:
     needs: publish_to_docker
     runs-on: ubuntu-latest
+    environment:
+      name: "Production-Server"
     steps:
       - name: executing remote ssh commands using private key
         uses: appleboy/ssh-action@master
