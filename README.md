@@ -10,10 +10,11 @@ Check out the live site: https://polite-mushroom-0e52d7700.5.azurestaticapps.net
 - [x] <strike> Add some basic REST API routes and structure according to Clean Architecture </strike>
 - [x] <strike> Setup basic frontend with clerk integration </strike>
 - [x] <strike> Cover some classes with unit tests to prepare for GitHub actions integration </strike>
-- [ ] Host on Azure App Service
-- [ ] Integrate into GitHub actions
+- [x] <strike> Host frontend with Azure Static Web App Service </strike>
+- [x] <strike> Host backend with Azure Linux VM </strike>
+- [x] <strike> Integrate deployment of client and server into GitHub actions </strike>
+- [ ] Design and build the frontend to match up to the backend
 - [ ] Cover all classes up until now with Unit Tests to prepare for TDD
-- [ ] Design and build the frontend to link up to the backend
 - [ ] Iteratively improve and add new features using TDD
 
 ## Contents
