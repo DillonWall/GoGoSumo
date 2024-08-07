@@ -1,6 +1,4 @@
 services:
-  # the client is hosted separately, it is excluded from the server VM
-
   server:
     image: zyphex/gogosumo-server
     ports:
