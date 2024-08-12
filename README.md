@@ -47,7 +47,7 @@ This project is still in development and has no quick start guide yet. Please ch
 
 ## Development Setup
 1. Pull the code from this repo.
-2. Navigate to the `GoGoSumo.Server` directory and run the `docker compose up` command in your terminal.
+2. Navigate to the `GoGoSumo.Server` directory and run the `docker compose up -f compose.dev.yml` command in your terminal.
 3. The following should now be available:
   - PgAdmin should now be running on `http://localhost:15432/browser/`
   - Postgres should be running on port `5432` and setup with Flyway migrations
