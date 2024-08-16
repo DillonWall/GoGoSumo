@@ -57,4 +57,4 @@ jobs:
           script: |
             cd ~/GoGoSumo
             git pull
-            sudo docker compose -f compose.prod.yml --env-file ./deploy/env.prod.db up -d
+            sudo docker compose -f compose.prod.yml --env-file ./deploy/.env.prod up -d
