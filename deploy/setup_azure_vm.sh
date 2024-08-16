@@ -1,6 +1,15 @@
 #! /bin/bash
-# https://docs.docker.com/engine/install/ubuntu/
-sudo apt-get update
+
+# :README:
+# Run the following commands manually to set up git and clone the repo, then navigate to the deploy directory and execute this script
+# sudo apt-get update
+# sudo apt-get install git
+# git clone https://github.com/DillonWall/GoGoSumo.git
+
+# :README:
+# Run this command to copy the env.prod file from your local machine to the VM
+#   (assumes you have the .pem file in the dir: ~/.ssh/gogosumo_vm/ with 700 permissions)
+# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
 
 # Add Docker's official GPG key:
 # sudo apt-get install ca-certificates curl
