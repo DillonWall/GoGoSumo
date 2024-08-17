@@ -10,9 +10,11 @@ public class UserController : ControllerBase
 {
     private IUserService _userService;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, ILogger<UserController> logger, IConfiguration configuration)
     {
         _userService = userService;
+        logger.LogInformation("UserController created");
+        logger.LogInformation("Pgrs conn str: {Configuration}", configuration.GetValue<string>("ConnectionStrings:PostgresConnection"));
     }
 
     [HttpGet]
