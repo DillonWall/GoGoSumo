@@ -34,6 +34,8 @@ public class Program
         builder.Services.AddScoped<IWeddingService, WeddingService>();
 
         var app = builder.Build();
+        app.Logger.LogInformation("Starting server...");
+        app.Logger.LogInformation("PostgresConnectionString: {PostgresConnectionString}", builder.Configuration.GetConnectionString("PostgresConnection"));
 
         app.UseDefaultFiles();
         app.UseStaticFiles();
