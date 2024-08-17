@@ -57,5 +57,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ~/GoGoSumo
-            git pull
+            git fetch --all
+            git reset --hard origin/main
             sudo docker compose -f compose.prod.yml --env-file ./deploy/.env.prod up -d
