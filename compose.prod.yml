@@ -2,7 +2,7 @@ services:
   server:
     image: zyphex/gogosumo-server
     environment:
-      - ConnectionStrings__PostgresConnection=${POSTGRES_CONNECTION_STRING}
+      - CUSTOMCONNSTR_PostgresConnection=${POSTGRES_CONNECTION_STRING}
     ports:
       - 5333:8080
     depends_on:
