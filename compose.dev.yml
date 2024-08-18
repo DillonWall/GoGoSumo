@@ -5,7 +5,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 3000:3000
+      - 8080:3000
     depends_on:
       - server
 
@@ -14,7 +14,8 @@ services:
       context: .
       target: final
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      ASPNETCORE_ENVIRONMENT: Development
+      CUSTOMCONNSTR_PostgresConnection: Server=gogosumo-postgres-1;Port=5432;Database=gogosumo;Username=postgres;Password=postgres;IncludeErrorDetail=true
     ports:
       - 5333:8080
     depends_on:
