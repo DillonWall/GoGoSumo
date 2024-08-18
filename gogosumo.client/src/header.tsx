@@ -1,4 +1,4 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"
+import { SignInButton, SignedIn, SignedOut, UserButton, ClerkLoading } from "@clerk/clerk-react"
 import { ModeToggle } from "./components/mode-toggle"
 
 const Header = () => {
@@ -15,14 +15,16 @@ const Header = () => {
 					/>
 					GoGo Sumo
 				</div>
-				<div className="flex gap-4">
+				<div className="flex gap-4 items-center">
 					<ModeToggle />
+
 					<SignedIn>
 						<UserButton afterSignOutUrl={window.location.href} />
 					</SignedIn>
 					<SignedOut>
 						<SignInButton mode="modal" />
 					</SignedOut>
+					<ClerkLoading>Loading...</ClerkLoading>
 				</div>
 			</div>
 		</header>
