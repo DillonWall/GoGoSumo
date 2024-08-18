@@ -33,6 +33,21 @@ public class Program
         builder.Services.AddScoped<IWeddingRepository, WeddingRepository>();
         builder.Services.AddScoped<IWeddingService, WeddingService>();
 
+        if (builder.Environment.IsDevelopment())
+        {
+            // Global CORS policy
+            builder.Services.AddCors(options => options
+                .AddDefaultPolicy(policy => policy
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true) // allow any origin
+                    //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins separated with comma
+                    .AllowCredentials() // allow credentials
+                )
+            );
+        }
+
+
         var app = builder.Build();
         app.Logger.LogInformation("Starting server...");
         app.Logger.LogInformation("PostgresConnectionString: {PostgresConnectionString}", builder.Configuration.GetConnectionString("PostgresConnection"));
