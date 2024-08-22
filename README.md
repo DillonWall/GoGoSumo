@@ -13,6 +13,7 @@ Check out the live site: https://polite-mushroom-0e52d7700.5.azurestaticapps.net
 - [x] <strike> Host frontend with Azure Static Web App Service </strike>
 - [x] <strike> Host backend with Azure Linux VM </strike>
 - [x] <strike> Integrate deployment of client and server into GitHub actions </strike>
+- [ ] Add HTTPS route to the backend
 - [ ] Design and build the frontend to match up to the backend
 - [ ] Cover all classes up until now with Unit Tests to prepare for TDD
 - [ ] Iteratively improve and add new features using TDD
