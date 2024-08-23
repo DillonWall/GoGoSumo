@@ -1,10 +1,16 @@
 services:
   server:
     image: zyphex/gogosumo-server
+    dockerfile: Dockerfile.prod
     environment:
-      - CUSTOMCONNSTR_PostgresConnection=${POSTGRES_CONNECTION_STRING}
+      ASPNETCORE_HTTPS_PORTS: 443
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ${HTTPS_CERT_PASSWORD}
+      CUSTOMCONNSTR_PostgresConnection: ${POSTGRES_CONNECTION_STRING}
+    volumes:
+      - ./deploy/cert.pfx:/https/cert.pfx
     ports:
-      - 5333:8080
+      - 443:443
     depends_on:
       - flyway
 
@@ -24,9 +30,9 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - 5432:5432
     healthcheck:

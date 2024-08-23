@@ -41,12 +41,11 @@ public class Program
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .SetIsOriginAllowed(origin => true) // allow any origin
-                    //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins separated with comma
+                                                        //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins separated with comma
                     .AllowCredentials() // allow credentials
                 )
             );
         }
-
 
         var app = builder.Build();
         app.Logger.LogInformation("Starting server...");
@@ -61,8 +60,6 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
-        app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

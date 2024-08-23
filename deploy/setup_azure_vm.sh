@@ -1,18 +1,23 @@
 #! /bin/bash
 
-# :README:
-# Run the following commands manually to set up git and clone the repo, then navigate to the deploy directory and execute this script
+### MANUALLY RUN ON VM
 # sudo apt-get update
 # sudo apt-get install git
 # git clone https://github.com/DillonWall/GoGoSumo.git
 
-# :README:
-# Run this command to copy the env.prod file from your local machine to the VM
-#   (assumes you have the .pem file in the dir: ~/.ssh/gogosumo_vm/ with 700 permissions)
+### MANUALLY RUN ON LOCAL LINUX MACHINE (copy secrets from local machine to vm)
 # scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
+# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem cert.pfx azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/cert.pfx
+
+### Only run this when setting up a real SSL certificate, don't need to do this with a self-signed dev cert
+# sudo apt-get -y install ca-certificates curl
+# # Setup HTTPS certificate
+# openssl pkcs12 -in ./deploy/cert.pfx -clcerts -nokeys -out gogosumo_cacert.crt
+# sudo cp gogosumo_cacert.crt /usr/local/share/ca-certificates/
+# sudo update-ca-certificates
+# rm gogosumo_cacert.crt
 
 # Add Docker's official GPG key:
-# sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc

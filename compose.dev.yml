@@ -3,7 +3,7 @@ services:
     build:
       context: ./gogosumo.client
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
     ports:
       - 8080:3000
     depends_on:
@@ -15,9 +15,16 @@ services:
       target: final
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTPS_PORTS: 5001
+      # https://stackoverflow.com/a/78881031/22737831
+      # dotnet dev-certs https -ep ./devcert.pfx -p "yKcRfx9iB5tulXkYZfWtfwNh" -v --trust
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/devcert.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: yKcRfx9iB5tulXkYZfWtfwNh
       CUSTOMCONNSTR_PostgresConnection: Server=gogosumo-postgres-1;Port=5432;Database=gogosumo;Username=postgres;Password=postgres;IncludeErrorDetail=true
+    volumes:
+      - ./devcert.pfx:/https/devcert.pfx
     ports:
-      - 5333:8080
+      - 5001:5001
     depends_on:
       - flyway
 

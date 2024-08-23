@@ -11,7 +11,7 @@ const UserTable = () => {
 
     useEffect(() => {
         axios
-            .get("http://20.2.233.181:5333/api/User")
+            .get("https://20.2.233.181:5001/api/User")
             // .get("http://localhost:5333/api/User")
             .then((response) => {
                 setData(response.data)

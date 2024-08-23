@@ -1,4 +1,4 @@
-@GoGoSumo.Server_HostAddress = http://localhost:5333
+@GoGoSumo.Server_HostAddress = https://localhost:5001
 
 GET {{GoGoSumo.Server_HostAddress}}/api/v1/
 Accept: application/json
