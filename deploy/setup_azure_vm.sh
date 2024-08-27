@@ -12,6 +12,10 @@
 # cd ~/GoGoSumo/deploy
 # sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/fullchain.pem ./fullchain.pem
 # sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/privkey.pem ./privkey.pem
+### Convenience aliases
+# echo "alias gogoup=\"sudo docker compose -f ~/GoGoSumo/compose.prod.yml --env-file ~/GoGoSumo/deploy/.env.prod up -d\"" >> ~/.bashrc
+# echo "alias gogodown=\"sudo docker compose -f ~/GoGoSumo/compose.prod.yml --env-file ~/GoGoSumo/deploy/.env.prod down\"" >> ~/.bashrc
+# source ~/.bashrc
 
 ##### MANUALLY RUN ON LOCAL (LINUX) MACHINE FROM "GoGoSumo/deploy/" (copy secrets from local machine to vm)
 # scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
