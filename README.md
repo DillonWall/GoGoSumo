@@ -14,11 +14,12 @@ Check out the live site: https://polite-mushroom-0e52d7700.5.azurestaticapps.net
 - [x] <strike> Host backend with Azure Linux VM </strike>
 - [x] <strike> Integrate deployment of client and server into GitHub actions </strike>
 - [x] <strike> Add HTTPS route to the backend (self-signed in dev and prod) </strike> 
-- [ ] Change from self-signed cert to one from a CA. (free certs can be found via https://letsencrypt.org/getting-started/)
+- [x] <strike> Change from self-signed cert to one from a CA. (free certs can be found via https://letsencrypt.org/getting-started/) </strike> 
 - [ ] Design and build the frontend to match up to the backend
 - [ ] Cover all classes up until now with Unit Tests to prepare for TDD
 - [ ] Iteratively improve and add new features using TDD
 - [ ] Introduce more CI/CD tooling, specifically Terrform for IaC with an aim at cloud provider independent infrastructure
+- [ ] Add Nginx load balancing / reverse proxy, maybe multiple VMs, maybe k8s
 
 ## Contents
 * [Why This Project?](#why-this-project)
