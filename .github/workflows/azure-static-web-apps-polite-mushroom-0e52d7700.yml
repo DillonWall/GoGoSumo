@@ -36,4 +36,5 @@ jobs:
           output_location: "./dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}

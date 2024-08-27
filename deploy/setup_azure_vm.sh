@@ -15,7 +15,6 @@
 
 ##### MANUALLY RUN ON LOCAL (LINUX) MACHINE FROM "GoGoSumo/deploy/" (copy secrets from local machine to vm)
 # scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
-# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem ../gogosumo.client/.env azureuser@20.2.233.181:/home/azureuser/GoGoSumo/gogosumo.client/.env
 
 
 
