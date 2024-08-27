@@ -10,13 +10,10 @@ const UserTable = () => {
     // const [error, setError] = useState(null)
 
     useEffect(() => {
-        axios
-            .get("https://20.2.233.181:5001/api/User")
-            // .get("http://localhost:5333/api/User")
-            .then((response) => {
-                setData(response.data)
-                // setLoading(false)
-            })
+        axios.get(`${import.meta.env.VITE_API_URL}/User`).then((response) => {
+            setData(response.data)
+            // setLoading(false)
+        })
         // .catch((error) => {
         //     setError(error)
         //     setLoading(false)

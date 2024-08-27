@@ -1,22 +1,26 @@
 #! /bin/bash
 
-### MANUALLY RUN ON VM
+##### MANUALLY RUN ON VM
 # sudo apt-get update
 # sudo apt-get install git
 # git clone https://github.com/DillonWall/GoGoSumo.git
+### Setup SSL cert
+# sudo apt install snapd
+# sudo snap install --classic certbot
+# sudo ln -s /snap/bin/certbot /usr/bin/certbot
+# sudo certbot certonly --standalone
+# cd ~/GoGoSumo/deploy
+# sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/fullchain.pem ./fullchain.pem
+# sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/privkey.pem ./privkey.pem
 
-### MANUALLY RUN ON LOCAL LINUX MACHINE (copy secrets from local machine to vm)
+##### MANUALLY RUN ON LOCAL (LINUX) MACHINE FROM "GoGoSumo/deploy/" (copy secrets from local machine to vm)
 # scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
-# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem cert.pfx azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/cert.pfx
+# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem ../gogosumo.client/.env azureuser@20.2.233.181:/home/azureuser/GoGoSumo/gogosumo.client/.env
 
-### Only run this when setting up a real SSL certificate, don't need to do this with a self-signed dev cert
-# sudo apt-get -y install ca-certificates curl
-# # Setup HTTPS certificate
-# openssl pkcs12 -in ./deploy/cert.pfx -clcerts -nokeys -out gogosumo_cacert.crt
-# sudo cp gogosumo_cacert.crt /usr/local/share/ca-certificates/
-# sudo update-ca-certificates
-# rm gogosumo_cacert.crt
 
+
+
+### Install Docker
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc

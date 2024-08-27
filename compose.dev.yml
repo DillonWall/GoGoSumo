@@ -1,3 +1,5 @@
+# Note: "secrets" are in plain text here because this is just for local development; no sensitive data is stored here.
+
 services:
   client:
     build:
