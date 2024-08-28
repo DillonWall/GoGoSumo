@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure VM - GoGoSumo.Server
+name: Server - Build and deploy ASP.Net Core app to Azure VM
 
 on:
   push:
