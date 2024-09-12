@@ -1,7 +1,7 @@
 # GoGoSumo
 .NET Core + React + Vite - Fullstack application for a Japan travel guide services site
 
-Check out the live site: [https://polite-mushroom-0e52d7700.5.azurestaticapps.net](https://gogosumo.netlify.app/)
+Check out the live site: https://gogosumo.netlify.app/
 
 ## Status
 - [x] <strike> Initial system and database design </strike>
