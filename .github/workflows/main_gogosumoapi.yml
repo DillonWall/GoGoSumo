@@ -1,4 +1,4 @@
-name: Server - Build and deploy ASP.Net Core app to Azure VM
+name: Server - Build and deploy ASP.Net Core app to VM
 
 on:
   push:
