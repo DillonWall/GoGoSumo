@@ -43,19 +43,14 @@ jobs:
           push: true
           tags: zyphex/gogosumo-server:latest
 
-  create_new_container:
+  deploy_container_to_vm:
     needs: publish_to_docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment:
       name: "Production-Server"
     steps:
-      - name: executing remote ssh commands using private key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
+      - name: Update repo on VM and Docker compose up
+        run: |
             cd ~/GoGoSumo
             git fetch --all
             git reset --hard origin/main
