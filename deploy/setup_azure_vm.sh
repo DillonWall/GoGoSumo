@@ -41,3 +41,8 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+### Create the docker group and add the current user to it
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo chgrp docker /var/run/docker.sock
