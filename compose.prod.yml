@@ -7,8 +7,8 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /etc/ssl/undergroundduel.key
       CUSTOMCONNSTR_PostgresConnection: ${POSTGRES_CONNECTION_STRING}
     volumes:
-      - /etc/ssl/undergroundduel.fullcert.pem:/etc/ssl/undergroundduel.fullcert.pem
-      - /etc/ssl/undergroundduel.key:/etc/ssl/undergroundduel.key
+      - ./deploy/undergroundduel.fullcert.pem:/etc/ssl/undergroundduel.fullcert.pem
+      - ./deploy/undergroundduel.key:/etc/ssl/undergroundduel.key
     ports:
       - 7600:443
     depends_on:

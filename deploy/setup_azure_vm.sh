@@ -5,21 +5,14 @@
 ################
 
 ##### MANUALLY RUN ON VM
+# cd ~
 # sudo apt-get update
 # sudo apt-get -y install git
-# git clone https://github.com/DillonWall/GoGoSumo.git
-### Setup SSL cert
-# sudo apt install snapd
-# sudo snap install --classic certbot
-# sudo ln -s /snap/bin/certbot /usr/bin/certbot
-# sudo certbot certonly --standalone
-# cd ~/GoGoSumo/deploy
-# sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/fullchain.pem ./fullchain.pem
-# sudo cp /etc/letsencrypt/live/gogosumoapi.eastasia.cloudapp.azure.com/privkey.pem ./privkey.pem
+# git clone https://github.com/DillonWallOrg/GoGoSumo.git
 
-##### MANUALLY RUN ON LOCAL (LINUX) MACHINE FROM "GoGoSumo/deploy/" (copy secrets from local machine to vm)
-# scp -i ~/.ssh/gogosumo_vm/GoGoSumo-VM-Main_key.pem .env.prod azureuser@20.2.233.181:/home/azureuser/GoGoSumo/deploy/.env.prod
-
+##### MANUALLY COPY SECRETS AND CERTS
+## copy certs from /etc/ssl/ into ~/GoGoSumo/deploy
+## copy .env.prod from local ~/GoGoSumo/deploy to server ~/GoGoSumo/deploy
 
 
 ################
