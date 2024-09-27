@@ -55,7 +55,7 @@ public class Program
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                   policy =>
                   {
-                      policy.WithOrigins(builder.Configuration.GetValue<string[]>("AllowedOrigins")!)
+                      policy.WithOrigins(builder.Configuration.GetValue<string>("AllowedOrigins")!.Split(";"))
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                   });
@@ -64,7 +64,7 @@ public class Program
 
         var app = builder.Build();
         app.Logger.LogInformation("Starting server...");
-        app.Logger.LogInformation(string.Join(";", builder.Configuration.GetValue<string[]>("AllowedOrigins")!));
+        app.Logger.LogInformation(builder.Configuration.GetValue<string>("AllowedOrigins"));
 
         app.UseDefaultFiles();
         app.UseStaticFiles();
