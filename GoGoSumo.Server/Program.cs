@@ -64,7 +64,7 @@ public class Program
 
         var app = builder.Build();
         app.Logger.LogInformation("Starting server...");
-        app.Logger.LogInformation(builder.Configuration.GetValue<string[]>("AllowedOrigins")!.ToString());
+        app.Logger.LogInformation(string.Join(";", builder.Configuration.GetValue<string[]>("AllowedOrigins")!));
 
         app.UseDefaultFiles();
         app.UseStaticFiles();
