@@ -46,10 +46,21 @@ public class Program
                 )
             );
         }
+        else
+        {
+            // Allow specific origins
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                  policy =>
+                  {
+                      policy.WithOrigins(builder.Configuration.GetValue<string[]>("AllowedOrigins")!);
+                  });
+            });
+        }
 
         var app = builder.Build();
         app.Logger.LogInformation("Starting server...");
-        app.Logger.LogInformation("PostgresConnectionString: {PostgresConnectionString}", builder.Configuration.GetConnectionString("PostgresConnection"));
 
         app.UseDefaultFiles();
         app.UseStaticFiles();

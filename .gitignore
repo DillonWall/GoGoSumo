@@ -405,3 +405,4 @@ gogosumo.client/.env
 deploy/flyway.prod.conf
 deploy/.env.prod
 *.key
+.DS_Store
