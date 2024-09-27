@@ -33,6 +33,7 @@ public class Program
         builder.Services.AddScoped<IWeddingRepository, WeddingRepository>();
         builder.Services.AddScoped<IWeddingService, WeddingService>();
 
+        string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         if (builder.Environment.IsDevelopment())
         {
             // Global CORS policy
@@ -51,10 +52,12 @@ public class Program
             // Allow specific origins
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                options.AddPolicy(name: MyAllowSpecificOrigins,
                   policy =>
                   {
-                      policy.WithOrigins(builder.Configuration.GetValue<string[]>("AllowedOrigins")!);
+                      policy.WithOrigins(builder.Configuration.GetValue<string[]>("AllowedOrigins")!)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                   });
             });
         }
@@ -69,8 +72,11 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI();
+        } else {
+            app.UseCors(MyAllowSpecificOrigins);
         }
 
         app.UseAuthorization();
