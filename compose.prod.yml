@@ -3,12 +3,12 @@ services:
     image: zyphex/gogosumo-server
     environment:
       ASPNETCORE_HTTPS_PORTS: 443
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/undergroundduel.fullcert.pem
-      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/undergroundduel.key
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/undergroundduel.fullcert.pem
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /app/undergroundduel.key
       CUSTOMCONNSTR_PostgresConnection: ${POSTGRES_CONNECTION_STRING}
     volumes:
-      - ./deploy/undergroundduel.fullcert.pem:/https/undergroundduel.fullcert.pem
-      - ./deploy/undergroundduel.key:/https/undergroundduel.key
+      - ./deploy/undergroundduel.fullcert.pem:/app/undergroundduel.fullcert.pem
+      - ./deploy/undergroundduel.key:/app/undergroundduel.key
     ports:
       - 7600:443
     depends_on:

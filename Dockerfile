@@ -9,10 +9,6 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 COPY ./GoGoSumo.Server/ /source/GoGoSumo.Server/
 COPY ./GoGoSumo.DTOs/ /source/GoGoSumo.DTOs/
 
-# Setup https folder with perms
-RUN mkdir /https
-RUN chown $APP_UID:$APP_UID /https
-
 WORKDIR /source
 
 ARG TARGETARCH
