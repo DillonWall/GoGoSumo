@@ -404,3 +404,4 @@ gogosumo.client/.env
 *.ppk
 deploy/flyway.prod.conf
 deploy/.env.prod
+*.key
