@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils"
 import Header from "../header"
+import { Outlet } from "react-router-dom"
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = () => {
 	return (
 		<div className={cn("min-h-screen bg-background font-sans antialiased")}>
 			<Header />
-			{children}
+			<Outlet />
+            <Footer />
 		</div>
 	)
 }
