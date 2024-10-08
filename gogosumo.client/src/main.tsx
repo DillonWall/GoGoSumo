@@ -8,14 +8,14 @@ import Providers from "./providers.tsx"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Providers>
-                    <Route path="/" element={<App />}>
-                        <Route index element={<RootLayout />}/>
+        <Providers>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<RootLayout />}>
+                        <Route index element={<App />} />
                     </Route>
-                </Providers>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </Providers>
     </React.StrictMode>
 )
